@@ -26,12 +26,12 @@ Follow the below steps to run and test locally
     import requests, json
     URL = "http://localhost:8000/api/v1/inference/allow"
     for i in range(100):
-        requests.post(URL, data=json.dumps({"user_id": "test_user_A", "model_id": "production_v1"}), headers={'Content-Type': 'application/json'})
+        requests.post(URL, data=json.dumps({"user_id": "test_user_A", "model_id": "test"}), headers={'Content-Type': 'application/json'})
     print("100 requests sent. Log is full.")"
 - this command will be rejected and retruns 429 error
     "bash curl -X POST "http://localhost:8000/api/v1/inference/allow" \
          -H "Content-Type: application/json" \
-         -d '{"user_id": "test_user_A", "model_id": "production_v1"}' -v "
+         -d '{"user_id": "test_user_A", "model_id": "test"}' -v "
 
 ## To stop the containers
 - bash docker compose down
