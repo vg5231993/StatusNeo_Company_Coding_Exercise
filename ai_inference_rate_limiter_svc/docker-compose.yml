@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # step - Redis Database Service (its an Shared State)
+  redis:
+    image: redis:7-alpine
+    container_name: rate-limiter-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  # step - FastAPI Application Service (its an Business Logic)
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rate-limiter-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    volumes:
+      - .:/app 
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - LOG_LEVEL=DEBUG 
+
+volumes:
+  redis_data:

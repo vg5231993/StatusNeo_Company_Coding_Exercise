@@ -1,0 +1,1 @@
+# Intentionally left empty to mark 'app' as a Python package.
